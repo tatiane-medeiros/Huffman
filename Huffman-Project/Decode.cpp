@@ -22,7 +22,7 @@
 
     //Reconstrói o texto original
      QByteArray Rebuild(QByteArray text, Node* root, int trash){
-         text.truncate(text.size() - trash);
+         text.chop(trash);
 
         QByteArray newtext;
         Node* current = root;
