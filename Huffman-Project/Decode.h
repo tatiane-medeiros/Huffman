@@ -13,9 +13,6 @@ QByteArray FromHead(char c1, char c2);
 //Retorna o tamanho do lixo e da arvore:
 QPair<int, int> Sizes(QByteArray code);
 
-//Reconstrói o texto original
- QByteArray Rebuild(QByteArray text, Node* root, int trash);
-
 //Cria o arquivo descompactado:
 QPair<int, QString> unzip(QString name);
 
