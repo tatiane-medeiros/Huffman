@@ -6,7 +6,7 @@
 #include <QString>
 #include <QPair>
 #include <Code.h>
-#include<qDebug>
+
 
 //Recebe o codigo binario dos dois primeiros caracteres:
 QByteArray FromHead(char c1, char c2);
