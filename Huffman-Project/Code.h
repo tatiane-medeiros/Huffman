@@ -33,7 +33,7 @@
    QString newName(QString name);
 
 //Cria o arquivo compactado:
-   QPair<int, QString> zip(QString name);
+   QPair<int, QString> zip(QString name, QString newname);
 
 
 

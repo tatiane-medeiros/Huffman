@@ -13,14 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        gui.cpp \
     Node.cpp \
     Code.cpp \
-    Decode.cpp
+    Decode.cpp \
+    gui.cpp
 
-HEADERS  += gui.h \
+HEADERS  += \
     Node.h \
     Code.h \
-    Decode.h
+    Decode.h \
+    gui.h \
+    help.h
 
-FORMS    += gui.ui
+FORMS    += \
+    gui.ui

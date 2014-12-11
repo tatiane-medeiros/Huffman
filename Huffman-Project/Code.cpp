@@ -123,7 +123,10 @@
 
 
 
-    QPair<int,QString> zip(QString name){
+    QPair<int,QString> zip(QString name, QString newname){
+        if(newname.isEmpty() || newname.isNull()){
+            newname = newName(name);
+        }
 
       int char_f[256] = {0};
       QFile file(name);
@@ -132,6 +135,7 @@
             return QPair<int,QString> (1,"");
 
          }
+        if(file.size()<1) return QPair<int,QString> (1,"");
 
      //contagem de caracteres:
          while (!file.atEnd()) {
@@ -197,7 +201,6 @@
 
       //Cria o novo arquivo:
 
-        QString newname = newName(name);
 
         QFile newfile(newname);
         if(!newfile.open(QIODevice::WriteOnly)){
@@ -221,7 +224,6 @@
         newfile.close();
 
         return QPair<int,QString> (0,newname);
-
 
 
     }

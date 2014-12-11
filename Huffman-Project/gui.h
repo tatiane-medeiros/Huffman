@@ -15,6 +15,7 @@ public:
     explicit Gui(QWidget *parent = 0);
     ~Gui();
 
+
 private slots:
     void on_comprime_clicked();
 
@@ -22,6 +23,12 @@ private slots:
 
 
     void on_limpar_clicked();
+
+    void on_toolButton_clicked();
+
+    void on_arqOriginal_editingFinished();
+
+    void on_toolButton_2_clicked();
 
 private:
     Ui::Gui *ui;

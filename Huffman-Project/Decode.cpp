@@ -12,39 +12,18 @@
     //Retorna o tamanho do lixo e da arvore:
     QPair<int, int> Sizes(QByteArray code){
         bool ok;
-        QByteArray y = code, z = code.right(13);
-        y.truncate(3);
+        QByteArray y = code.left(3), z = code.right(13);
+
 
         int trash = y.toInt(&ok,2) ;
         int treeSize =z.toInt(&ok,2);
         return QPair<int,int> (trash, treeSize);
     }
 
-    //Reconstrói o texto original
-     QByteArray Rebuild(QByteArray text, Node* root, int trash){
-         text.truncate(text.size() - trash);
-
-        QByteArray newtext;
-        Node* current = root;
-        for(int i=0; i<text.size(); i++){
-           if(text.at(i) == '0'){
-               current = current->left;
-           }
-           else{
-               current = current->right;
-           }
-           if(current->isLeaf()){
-               char c = current->content;
-               newtext.append(c);
-               current = root;
-           }
-        }
-        return newtext;
-    }
 
 
-     QPair<int, QString> unzip(QString name){
-         //decodificar
+
+     QPair<int, QString> unzip(QString name, QString local){
 
          if(name.right(5) != (QString)".huff"){
                return QPair<int, QString> (2,"");
@@ -56,14 +35,12 @@
             }
 
      // Lendo o cabeçalho:
-           QByteArray aux = newfile.read(2);
-
+           QByteArray aux = newfile.read(3);
+            int tamName = aux.at(2);
             aux = FromHead(aux[0],aux[1]);
 
-           int tr = Sizes(aux).first ;
+           int trash = Sizes(aux).first ;
            int tamArv = Sizes(aux).second;
-            aux = newfile.read(1);
-           int tamName = aux.at(0);
 
 
      // Recebe o nome do arquivo original:
@@ -78,34 +55,56 @@
            Node *tree;
            tree = tree->FromByteArray(T, 0).first;
 
-     // Converte os caracteres do arquivo em binário:
+           if(!local.isEmpty()){
+               original.insert(0, local);
+           }
+
+     // Converte os caracteres do arquivo em binário e recontrói o arquivo:
           QByteArray aux2;
+          QByteArray text;
+          Node* current = tree;
+          QFile myfile(original);          
+
+          if(!myfile.open(QIODevice::WriteOnly)){
+             return QPair<int, QString> (1,"");
+          }
+
            while (!newfile.atEnd()) {
                QByteArray line = newfile.read(1024);
                for(int i=0; i<line.size(); ++i){
-                  unsigned char current = line.at(i);
-                    QByteArray a = set(QByteArray::number(current,2),8);
+                  unsigned char currentch = line.at(i);
+                    QByteArray a = set(QByteArray::number(currentch,2),8);
 
                     aux2.append(a);
                }
+
+               //   Remove o lixo:
+                      if(newfile.atEnd()) aux2.chop(trash);
+
+               //  Reconstrói o arquivo original
+                      for(int i=0; i< aux2.size(); ++i){
+                         if(aux2.at(i) == '0'){
+                             current = current->left;
+                         }
+                         else{
+                             current = current->right;
+                         }
+                         if(current->isLeaf()){
+                             unsigned char c = current->content;
+                             text.append(c);
+                             current = tree;
+                         }
+                      }
+                      myfile.write(text);
+                      text.clear();
+                      aux2.clear();
+
            }
 
-     // Reconstrói o arquivo original:
-
-           QByteArray text = Rebuild(aux2, tree, tr);
-
-
-           QFile myfile(original);
-          if(!myfile.open(QIODevice::WriteOnly)){
-              return QPair<int, QString>(1,"");
-          }
-          else{
-
-           myfile.write(text);
 
            myfile.close();
            return QPair<int, QString> (0,original);
-          }
+
 
      }
 
