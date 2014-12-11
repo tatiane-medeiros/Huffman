@@ -45,20 +45,19 @@
 
      // Recebe o nome do arquivo original:
            QByteArray original = newfile.read(tamName);
-
+           
+            if(!local.isEmpty()){
+               local.append('/');
+               original.insert(0, local);
+           }
 
      // Recebe a representação da árvore:
             QByteArray T;
             T.append(newfile.read(tamArv));
 
-
            Node *tree;
            tree = tree->FromByteArray(T, 0).first;
 
-           if(!local.isEmpty()){
-               local.append('/');
-               original.insert(0, local);
-           }
 
      // Converte os caracteres do arquivo em binário e recontrói o arquivo:
           QByteArray aux2;
