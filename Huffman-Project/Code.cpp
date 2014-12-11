@@ -101,9 +101,9 @@
 
     QByteArray Head(int trash, int Tsize){
        QByteArray trash_size = QByteArray::number(trash,2);
-       //set(trash_size,3);
+       
        QByteArray tree_size = QByteArray::number(Tsize,2);
-      // set(tree_size,13);
+      
        QByteArray head;
        head.append(set(trash_size,3)).append(set(tree_size,13));
        return head;
@@ -137,7 +137,7 @@
          }
         if(file.size()<1) return QPair<int,QString> (1,"");
 
-     //contagem de caracteres:
+     // Contagem de caracteres:
          while (!file.atEnd()) {
              QByteArray line = file.readLine();
              for(int i = 0; i < line.size(); ++i) {
@@ -146,7 +146,7 @@
          }
          file.close();
 
-      // lista:
+      // Lista:
          QList<char> l;
          QList<Node*> list;
 
@@ -161,14 +161,14 @@
              }
          }
 
-     // arvore:
+     // Árvore:
 
          Node *tree;
          tree = ordenTree(list);
 
          QByteArray a = tree->ToByteArray(tree);
 
-    // codificação:
+    // Codificação:
        QString code[256];
        QString simb[l.size()];
          for(int i = 0; i < l.size(); ++i){
