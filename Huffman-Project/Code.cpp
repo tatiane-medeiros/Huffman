@@ -101,9 +101,9 @@
 
     QByteArray Head(int trash, int Tsize){
        QByteArray trash_size = QByteArray::number(trash,2);
-       //set(trash_size,3);
+       
        QByteArray tree_size = QByteArray::number(Tsize,2);
-      // set(tree_size,13);
+      
        QByteArray head;
        head.append(set(trash_size,3)).append(set(tree_size,13));
        return head;
