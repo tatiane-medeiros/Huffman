@@ -132,6 +132,8 @@
             return QPair<int,QString> (1,"");
 
          }
+        
+        if(file.size()<1) return QPair<int,QString> (1,"");
 
      //contagem de caracteres:
          while (!file.atEnd()) {
