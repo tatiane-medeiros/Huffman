@@ -21,14 +21,10 @@ private slots:
 
     void on_descomprime_clicked();
 
-
     void on_limpar_clicked();
 
     void on_toolButton_clicked();
 
-    void on_arqOriginal_editingFinished();
-
-    void on_toolButton_2_clicked();
 
 private:
     Ui::Gui *ui;

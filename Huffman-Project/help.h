@@ -16,8 +16,12 @@ void help(){
         << "       Inicia a interface\n";
 }
 
-void check(int i){
+void check_desc(int i){
     if(i==0)qDebug() << "  Arquivo descomprimido com sucesso!\n";
+    else qDebug() << "  O arquivo não pode ser lido!\n";
+}
+void check_comp(int i){
+    if(i==0)qDebug() << "  Arquivo comprimido com sucesso!\n";
     else qDebug() << "  O arquivo não pode ser lido!\n";
 }
 

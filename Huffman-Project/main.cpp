@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
             if(name.right(5) == ".huff"){
                 int exit = unzip(name,"").first;
 
-                check(exit);
+                check_desc(exit);
             }
             else{
                 qDebug() << "   Erro! Insira um arquivo HUFF.\n";
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
         QString name = argv[2];
         QString newname = newName(name);
         int exit = zip(name, newname).first;
-        check(exit);
+        check_comp(exit);
 
     }
 
@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
         QString name = argv[2];
         QString newname = argv[4];
         int exit = zip(name, newname).first;
-        check(exit);
+        check_comp(exit);
 
     }
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
         QString name = argv[1];
         QString local = argv[3];
         int exit = unzip(name, local).first;
-        check(exit);
+        check_desc(exit);
     }
 
     else{

@@ -56,6 +56,7 @@
            tree = tree->FromByteArray(T, 0).first;
 
            if(!local.isEmpty()){
+               local.append('/');
                original.insert(0, local);
            }
 
