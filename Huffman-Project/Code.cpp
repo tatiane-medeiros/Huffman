@@ -62,7 +62,9 @@
 
 
     int trashSize(QByteArray encode){
-        return (Complete(encode).size() - encode.size());
+         if(encode.size()%8 == 0) return 0;
+        else
+        return (8 - encode.size()%8);
     }
 
 
