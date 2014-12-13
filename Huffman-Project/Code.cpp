@@ -180,7 +180,7 @@
         QByteArray encode;
          file.open(QIODevice::ReadOnly);
          while (!file.atEnd()) {
-            QByteArray Line = file.readLine();
+            QByteArray Line = file.read(1024);
              for(int i = 0; i < Line.size(); ++i) {
                   unsigned char current = Line.at(i);
                   encode.append(code[current].toLocal8Bit());
