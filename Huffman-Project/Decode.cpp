@@ -21,6 +21,23 @@
     }
 
 
+    QPair<Node*, int> FromByteArray(QByteArray data, int pos){
+        char current = data.at(pos);
+        if(current != 0x21){
+            if(current == 0x23){
+                ++pos;
+                current = data.at(pos);
+            }
+            return QPair<Node*, int> (new Node(0,current), pos);
+        }
+
+            QPair<Node*, int> leftNode = FromByteArray(data, pos+1);
+            QPair<Node*, int> rightNode = FromByteArray(data, leftNode.second +1);
+            Node* node = new Node(0,0x21, leftNode.first, rightNode.first);
+            return QPair<Node*, int> (node , rightNode.second);
+
+    }
+
 
 
      QPair<int, QString> unzip(QString name, QString local){
@@ -40,7 +57,7 @@
             aux = FromHead(aux[0],aux[1]);
 
            int trash = Sizes(aux).first ;
-           int tamArv = Sizes(aux).second;
+           int treeSize = Sizes(aux).second;
 
 
      // Recebe o nome do arquivo original:
@@ -49,11 +66,15 @@
 
      // Recebe a representação da árvore:
             QByteArray T;
-            T.append(newfile.read(tamArv));
+            T.reserve(treeSize);
+            T = newfile.read(treeSize);
+            qDebug() <<treeSize;
+            qDebug() <<T ;
 
+           Node *tree = FromByteArray(T,0).first;
+           qDebug ()<< treeSize;
 
-           Node *tree;
-           tree = tree->FromByteArray(T, 0).first;
+           qDebug()<<tree->ToByteArray(tree);
 
            if(!local.isEmpty()){
                local.append('/');
@@ -79,27 +100,27 @@
                     aux2.append(a);
                }
 
-               //   Remove o lixo:
-                      if(newfile.atEnd()) aux2.chop(trash);
+     //   Remove o lixo:
+               if(newfile.atEnd()) aux2.chop(trash);
 
-               //  Reconstrói o arquivo original
-                      for(int i=0; i< aux2.size(); ++i){
-                         if(aux2.at(i) == '0'){
-                             current = current->left;
-                         }
-                         else{
-                             current = current->right;
-                         }
-                         if(current->isLeaf()){
-                             unsigned char c = current->content;
-                             text.append(c);
-                             current = tree;
-                         }
-                      }
-                      myfile.write(text);
-                      text.clear();
-                      aux2.clear();
+     //  Reconstrói o arquivo original
+               for(int i=0; i< aux2.size(); ++i){
+                     if(aux2.at(i) == '0'){
+                         current = current->left;
+                     }
+                     else{
+                         current = current->right;
+                     }
+                     if(current->isLeaf()){
+                         unsigned char c = current->content;
+                         text.append(c);
+                         current = tree;
+                     }
+                }
 
+                myfile.write(text);
+                text.clear();
+                aux2.clear();
            }
 
 

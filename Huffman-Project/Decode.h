@@ -8,8 +8,12 @@
 #include <Code.h>
 #include<qDebug>
 
+
 //Recebe o codigo binario dos dois primeiros caracteres:
 QByteArray FromHead(char c1, char c2);
+
+//Retorna a árvore a partir da representação em string
+QPair<Node*, int> FromByteArray(QByteArray data);
 
 //Retorna o tamanho do lixo e da arvore:
 QPair<int, int> Sizes(QByteArray code);

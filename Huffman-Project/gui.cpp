@@ -24,25 +24,21 @@
     {
         //comprime
        QString name = ui->arqOriginal->text();
-
+        qDebug() <<name;
 
        QString newname = newName(name);
+        qDebug()<<newname;
 
        QString aux = ui->arqNovo->text();
        if(aux.size() > 1){
            qDebug() <<aux;
-           for(int i = newname.size() - 1; i>0 ; --i){
-               if(newname.at(i) == '/' ){
-                   newname.remove(0, i+1);
-                   aux.append('/');
-                   newname.insert(0, aux);
-                   break;
-               }
+           newname = newLocal(newname, aux);
            }
-       }
-       else newname = "";
-       qDebug() << newname;
-       int exit = zip(name,newname).first;
+       }       
+
+       int exit = zip(name,newname);
+
+
        if(exit == 0){
           ui->arqNovo->setText(newname);
           QMessageBox info;
@@ -62,7 +58,7 @@
 
         QString aux = ui->arqNovo->text();
         if(aux.size() > 1){
-            qDebug() <<aux;
+
         }
         else
             aux = "";
@@ -70,10 +66,7 @@
         int exit = unzip(name, aux).first;
         QString newname = unzip(name,aux).second;
 
-        qDebug() <<newname;
-
-
-        if(exit == 0){
+         if(exit == 0){
            ui->arqNovo->setText(newname);
            QMessageBox info;
               info.setText("O arquivo foi descomprimido com sucesso!");

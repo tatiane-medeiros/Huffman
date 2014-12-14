@@ -6,6 +6,7 @@
 #include <Node.h>
 #include <QString>
 #include <QFile>
+#include <QDebug>
 
 
 //  Constrói a arvore utilizando a frequencia:
@@ -32,8 +33,11 @@
 //  Retorna o nome do novo arquivo:
    QString newName(QString name);
 
+//Adiciona o novo local do arquivo:
+    QString newLocal(QString name, QString local);
+
 //Cria o arquivo compactado:
-   QPair<int, QString> zip(QString name, QString newname);
+   int zip(QString name, QString newname);
 
 
 

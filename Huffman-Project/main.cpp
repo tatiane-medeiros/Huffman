@@ -9,7 +9,6 @@
 int main(int argc, char *argv[])
 {
 
-
     if(argc == 2){
 
         if(argv[1] == "--help"){
@@ -42,7 +41,7 @@ int main(int argc, char *argv[])
     else if( argc == 3 && argv[1] == "-c"){
         QString name = argv[2];
         QString newname = newName(name);
-        int exit = zip(name, newname).first;
+        int exit = zip(name, newname);
         check_comp(exit);
 
     }
@@ -50,7 +49,7 @@ int main(int argc, char *argv[])
     else if( argc == 5 && argv[1] == "-c" && argv[3] == "-o"){
         QString name = argv[2];
         QString newname = argv[4];
-        int exit = zip(name, newname).first;
+        int exit = zip(name, newname);
         check_comp(exit);
 
     }

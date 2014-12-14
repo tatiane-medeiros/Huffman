@@ -62,7 +62,9 @@
 
 
     int trashSize(QByteArray encode){
-        return (Complete(encode).size() - encode.size());
+        if(encode.size()%8 == 0) return 0;
+        else
+        return (8 - encode.size()%8);
     }
 
 
@@ -101,9 +103,9 @@
 
     QByteArray Head(int trash, int Tsize){
        QByteArray trash_size = QByteArray::number(trash,2);
-       
+       //set(trash_size,3);
        QByteArray tree_size = QByteArray::number(Tsize,2);
-      
+      // set(tree_size,13);
        QByteArray head;
        head.append(set(trash_size,3)).append(set(tree_size,13));
        return head;
@@ -112,18 +114,43 @@
 
     QString newName(QString name){
        QString newname = name;
-       for(int j = newname.size() - 1; newname[j]!='.'; --j){
-           newname.remove(j,1);
+       int j;
+
+       for(j = newname.size() - 1; j>=0; --j){
+       if(newname.at(j) == '.'){
+             newname.remove(j,(name.size() - j ));
+             newname.append(".huff");
+             break;
+
+        }
+
+       if(j == 0){
+           newname = name;
+           newname.append(".huff");
        }
-       newname.remove(newname.size()-1,1);
-       newname.append(".huff");
+       }
+       qDebug() <<j;
 
        return newname;
     }
 
+     QString newLocal(QString name, QString local){
+
+             for(int i = name.size() - 1; i>0 ; --i){
+                 if(name.at(i) == '/' ){
+                     name.remove(0, i+1);
+                     local.append('/');
+                     name.insert(0, aux);
+                     break;
+                 }
+             }
+         }
+         return name;
+     }
 
 
-    QPair<int,QString> zip(QString name, QString newname){
+
+    int zip(QString name, QString newname){
         if(newname.isEmpty() || newname.isNull()){
             newname = newName(name);
         }
@@ -132,12 +159,12 @@
       QFile file(name);
 
         if(!file.open(QIODevice::ReadOnly)) {
-            return QPair<int,QString> (1,"");
+            return 1
 
          }
-        if(file.size()<1) return QPair<int,QString> (1,"");
+        if(file.size()<1) return 1;
 
-     // Contagem de caracteres:
+     //contagem de caracteres:
          while (!file.atEnd()) {
              QByteArray line = file.readLine();
              for(int i = 0; i < line.size(); ++i) {
@@ -146,7 +173,7 @@
          }
          file.close();
 
-      // Lista:
+      // lista:
          QList<char> l;
          QList<Node*> list;
 
@@ -161,14 +188,14 @@
              }
          }
 
-     // Árvore:
+     // arvore:
 
          Node *tree;
          tree = ordenTree(list);
 
          QByteArray a = tree->ToByteArray(tree);
 
-    // Codificação:
+    // codificação:
        QString code[256];
        QString simb[l.size()];
          for(int i = 0; i < l.size(); ++i){
@@ -177,15 +204,26 @@
              code[current] = simb[i];
          }
 
+
+         QFile newfile(newname);
+         if(!newfile.open(QIODevice::WriteOnly)){
+             return 1;
+
+         }
+
         QByteArray encode;
          file.open(QIODevice::ReadOnly);
          while (!file.atEnd()) {
-            QByteArray Line = file.readLine();
+            QByteArray Line = file.read(1024);
+            int m=Line.at(0);
+      //
+            qDebug()<<Line.at(0)<<(unsigned char)Line.at(0)<<m;
              for(int i = 0; i < Line.size(); ++i) {
                   unsigned char current = Line.at(i);
-                  encode.append(code[current].toLocal8Bit());
+                  encode.append(code[current]);
              }
          }
+         file.close();
 
          int tr = trashSize(encode);
          int tamArv = tree->ToByteArray(tree).size();
@@ -202,12 +240,6 @@
       //Cria o novo arquivo:
 
 
-        QFile newfile(newname);
-        if(!newfile.open(QIODevice::WriteOnly)){
-            return QPair<int,QString> (1,"");
-
-        }
-
         QByteArray aux;
         aux = (ToString(head));
 
@@ -217,13 +249,14 @@
         newfile.write(aux);
 
         aux = tree->ToByteArray(tree);
+        qDebug() <<a;
         newfile.write(aux);
         aux = ToString(encode);
         newfile.write(aux);
 
         newfile.close();
 
-        return QPair<int,QString> (0,newname);
+        return 0);
 
 
     }
