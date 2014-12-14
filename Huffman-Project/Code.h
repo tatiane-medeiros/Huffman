@@ -13,7 +13,7 @@
    Node *ordenTree(QList<Node*> list);
 
 //  Retorna o codigo de cada caractere na árvore:
-   QByteArray Coding( char c, Node *node);
+   QByteArray Coding( unsigned char c, Node *node);
 
 //  Completa o ultimo byte do texto
     QByteArray Complete(QByteArray encode );
