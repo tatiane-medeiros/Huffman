@@ -72,17 +72,8 @@
             QByteArray T;
             T.reserve(treeSize);
             T = newfile.read(treeSize);
-            qDebug() <<treeSize;
-            qDebug() <<T ;
 
            Node *tree = FromByteArray(T,0).first;
-           qDebug ()<< treeSize;
-
-           qDebug()<<tree->ToByteArray(tree);
-
-           Node *tree;
-           tree = tree->FromByteArray(T, 0).first;
-
 
      // Converte os caracteres do arquivo em binário e recontrói o arquivo:
           QByteArray aux2;
