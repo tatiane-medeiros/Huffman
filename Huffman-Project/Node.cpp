@@ -23,7 +23,7 @@ QByteArray Node:: ToByteArray(Node *node)
 
               ret.append(0x23);
            }
-        char c = node->content;
+        unsigned char c = node->content;
         ret.append(c);
         return ret;
       }
