@@ -1,7 +1,7 @@
 #include "Decode.h"
 
 
-    //Recebe o codigo binario dos dois primeiros caracteres:
+   
     QByteArray FromHead(char c1, char c2){
         QByteArray code;
         code.append(set(QByteArray::number((unsigned char)c1,2),8));
@@ -9,7 +9,7 @@
         return code;
     }
 
-    //Retorna o tamanho do lixo e da arvore:
+    
     QPair<int, int> Sizes(QByteArray code){
         bool ok;
         QByteArray y = code.left(3), z = code.right(13);
@@ -62,7 +62,11 @@
 
      // Recebe o nome do arquivo original:
            QByteArray original = newfile.read(tamName);
-
+           
+            if(!local.isEmpty()){
+               local.append('/');
+               original.insert(0, local);
+           }
 
      // Recebe a representação da árvore:
             QByteArray T;
@@ -71,15 +75,16 @@
             qDebug() <<treeSize;
             qDebug() <<T ;
 
+<<<<<<< HEAD
            Node *tree = FromByteArray(T,0).first;
            qDebug ()<< treeSize;
 
            qDebug()<<tree->ToByteArray(tree);
+=======
+           Node *tree;
+           tree = tree->FromByteArray(T, 0).first;
+>>>>>>> origin/master
 
-           if(!local.isEmpty()){
-               local.append('/');
-               original.insert(0, local);
-           }
 
      // Converte os caracteres do arquivo em binário e recontrói o arquivo:
           QByteArray aux2;
@@ -129,4 +134,3 @@
 
 
      }
-
