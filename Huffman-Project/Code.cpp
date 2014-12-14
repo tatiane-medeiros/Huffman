@@ -28,7 +28,7 @@
     }
 
 
-    QByteArray Coding( char c, Node *node){
+    QByteArray Coding(unsigned char c, Node *node){
           QByteArray  code;
           if(node->isLeaf())
              {
