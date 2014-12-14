@@ -75,15 +75,13 @@
             qDebug() <<treeSize;
             qDebug() <<T ;
 
-<<<<<<< HEAD
            Node *tree = FromByteArray(T,0).first;
            qDebug ()<< treeSize;
 
            qDebug()<<tree->ToByteArray(tree);
-=======
+
            Node *tree;
            tree = tree->FromByteArray(T, 0).first;
->>>>>>> origin/master
 
 
      // Converte os caracteres do arquivo em binário e recontrói o arquivo:
