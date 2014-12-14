@@ -62,11 +62,9 @@
 
 
     int trashSize(QByteArray encode){
-<<<<<<< HEAD
-        if(encode.size()%8 == 0) return 0;
-=======
+
          if(encode.size()%8 == 0) return 0;
->>>>>>> origin/master
+
         else
         return (8 - encode.size()%8);
     }
@@ -160,6 +158,8 @@
         }
 
       int char_f[256] = {0};
+      
+    // Abre o arquivo
       QFile file(name);
 
         if(!file.open(QIODevice::ReadOnly)) {
@@ -219,12 +219,7 @@
          file.open(QIODevice::ReadOnly);
          while (!file.atEnd()) {
             QByteArray Line = file.read(1024);
-<<<<<<< HEAD
-            int m=Line.at(0);
-      //
-            qDebug()<<Line.at(0)<<(unsigned char)Line.at(0)<<m;
-=======
->>>>>>> origin/master
+
              for(int i = 0; i < Line.size(); ++i) {
                   unsigned char current = Line.at(i);
                   encode.append(code[current]);
@@ -245,7 +240,6 @@
 
 
       //Cria o novo arquivo:
-
 
         QByteArray aux;
         aux = (ToString(head));
