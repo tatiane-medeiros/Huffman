@@ -64,8 +64,7 @@
            QByteArray original = newfile.read(tamName);
            
             if(!local.isEmpty()){
-               local.append('/');
-               original.insert(0, local);
+              original = newLocal(original, local);
            }
 
      // Recebe a representação da árvore:
