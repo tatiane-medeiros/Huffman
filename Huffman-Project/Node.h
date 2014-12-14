@@ -9,13 +9,13 @@ class Node{
 
      public:
 
-      char content;
+      unsigned char content;
       int freq;
       Node *left;
       Node *right;
       Node();
 
-      Node(int freq = 0,  char content = 0, Node *left = NULL, Node *right = NULL){
+      Node(int freq = 0, unsigned char content = 0, Node *left = NULL, Node *right = NULL){
         this->content = content;
         this->freq = freq;
         this->left = left;
