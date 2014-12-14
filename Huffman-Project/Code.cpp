@@ -138,15 +138,14 @@
 
      QString newLocal(QString name, QString local){
 
+          local.append('/');
              for(int i = name.size() - 1; i>0 ; --i){
                  if(name.at(i) == '/' ){
                      name.remove(0, i+1);
-                     local.append('/');
-                     name.insert(0, aux);
                      break;
                  }
              }
-         }
+             name.insert(0,local);
          return name;
      }
 
@@ -250,7 +249,6 @@
         newfile.write(aux);
 
         aux = tree->ToByteArray(tree);
-        qDebug() <<a;
         newfile.write(aux);
         aux = ToString(encode);
         newfile.write(aux);
@@ -261,5 +259,3 @@
 
 
     }
-
-
