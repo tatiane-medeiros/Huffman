@@ -119,19 +119,19 @@
        int j;
 
        for(j = newname.size() - 1; j>=0; --j){
-       if(newname.at(j) == '.'){
-             newname.remove(j,(name.size() - j ));
-             newname.append(".huff");
-             break;
-
-        }
-
-       if(j == 0){
-           newname = name;
-           newname.append(".huff");
+           if(newname.at(j) == '.'){
+                 newname.remove(j,(name.size() - j ));
+                 newname.append(".huff");
+                 break;
+    
+            }
+    
+           if(j == 0){
+               newname = name;
+               newname.append(".huff");
+           }
        }
-       }
-       qDebug() <<j;
+
 
        return newname;
     }
