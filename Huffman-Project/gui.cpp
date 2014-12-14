@@ -24,20 +24,17 @@
     {
         //comprime
        QString name = ui->arqOriginal->text();
-        qDebug() <<name;
-
+       
        QString newname = newName(name);
-        qDebug()<<newname;
-
+        
        QString aux = ui->arqNovo->text();
        if(aux.size() > 1){
-           qDebug() <<aux;
+           
            newname = newLocal(newname, aux);
            }
        }       
 
        int exit = zip(name,newname);
-
 
        if(exit == 0){
           ui->arqNovo->setText(newname);
@@ -57,11 +54,7 @@
         QString name = ui->arqOriginal->text();
 
         QString aux = ui->arqNovo->text();
-        if(aux.size() > 1){
-
-        }
-        else
-            aux = "";
+        if(aux.size() < 2) aux = "";
 
         int exit = unzip(name, aux).first;
         QString newname = unzip(name,aux).second;
