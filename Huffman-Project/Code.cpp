@@ -162,7 +162,7 @@
       QFile file(name);
 
         if(!file.open(QIODevice::ReadOnly)) {
-            return 1
+            return 1;
 
          }
         if(file.size()<1) return 1;
@@ -200,11 +200,11 @@
 
     // codificação:
        QString code[256];
-       QString simb[l.size()];
+      
          for(int i = 0; i < l.size(); ++i){
             unsigned char current = l.at(i);
-             simb[i] = Coding(current,tree);
-             code[current] = simb[i];
+            
+             code[current] =Coding(current,tree);
          }
 
 
@@ -255,7 +255,7 @@
 
         newfile.close();
 
-        return 0);
+        return 0;
 
 
     }
