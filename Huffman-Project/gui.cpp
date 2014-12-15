@@ -20,7 +20,7 @@
         delete ui;
     }
 
-    void Gui::on_comprime_clicked()
+      void Gui::on_comprime_clicked()
     {
         //comprime
        QString name = ui->arqOriginal->text();
@@ -31,12 +31,12 @@
        if(aux.size() > 1){
            
            newname = newLocal(newname, aux);
-           }
-       }       
 
-       int exit = zip(name,newname);
+       }
 
-       if(exit == 0){
+       int _exit = zip(name,newname);
+
+       if(_exit == 0){
           ui->arqNovo->setText(newname);
           QMessageBox info;
              info.setText("O arquivo foi comprimido com sucesso!");
@@ -56,17 +56,17 @@
         QString aux = ui->arqNovo->text();
         if(aux.size() < 2) aux = "";
 
-        int exit = unzip(name, aux).first;
+        int _exit = unzip(name, aux).first;
         QString newname = unzip(name,aux).second;
 
-         if(exit == 0){
+         if(_exit == 0){
            ui->arqNovo->setText(newname);
            QMessageBox info;
               info.setText("O arquivo foi descomprimido com sucesso!");
               info.exec();
         }
 
-        else if(exit == 2){
+        else if(_exit == 2){
             QMessageBox::information(this, "Erro", "  Insira um arquivo HUFF!");
         }
         else{
@@ -86,5 +86,3 @@
     {
            ui->arqNovo->setText(QFileDialog::getExistingDirectory(this,tr("Save File"), "/home"));
     }
-
-
