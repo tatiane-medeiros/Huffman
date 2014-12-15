@@ -8,14 +8,18 @@
 
 int main(int argc, char *argv[])
 {
+    QString arg[argc];
+    for(int i=1;i<argc;++i){
+        arg[i]=argv[i];
+    }
 
     if(argc == 2){
 
-        if(argv[1] == "--help"){
+        if(arg[1] == "--help"){
             help();
         }
 
-        else if(argv[1] == "--gui" ){
+        else if(arg[1] == "--gui" ){
             QApplication a(argc, argv);
 
             Gui w;
@@ -25,7 +29,7 @@ int main(int argc, char *argv[])
 
 
         else{
-            QString name = argv[1];
+            QString name = arg[1];
             if(name.right(5) == ".huff"){
                 int exit = unzip(name,"").first;
 
@@ -38,25 +42,25 @@ int main(int argc, char *argv[])
 
     }
 
-    else if( argc == 3 && argv[1] == "-c"){
-        QString name = argv[2];
+    else if( argc == 3 && arg[1] == "-c"){
+        QString name = arg[2];
         QString newname = newName(name);
         int exit = zip(name, newname);
         check_comp(exit);
 
     }
 
-    else if( argc == 5 && argv[1] == "-c" && argv[3] == "-o"){
-        QString name = argv[2];
-        QString newname = argv[4];
+    else if( argc == 5 && arg[1] == "-c" && arg[3] == "-o"){
+        QString name = arg[2];
+        QString newname = arg[4];
         int exit = zip(name, newname);
         check_comp(exit);
 
     }
 
-    else if( argc == 4 && argv[2] == "-d"){
-        QString name = argv[1];
-        QString local = argv[3];
+    else if( argc == 4 && arg[2] == "-d"){
+        QString name = arg[1];
+        QString local = arg[3];
         int exit = unzip(name, local).first;
         check_desc(exit);
     }
@@ -65,6 +69,6 @@ int main(int argc, char *argv[])
         help();
     }
 
-
+return 0;
 
 }
