@@ -61,7 +61,7 @@
 
 
      // Recebe o nome do arquivo original:
-           QByteArray original = newfile.read(tamName);
+           QString original = newfile.read(tamName);
            
             if(!local.isEmpty()){
               original = newLocal(original, local);
