@@ -27,3 +27,5 @@ HEADERS  += \
 
 FORMS    += \
     gui.ui
+
+RC_FILE = dialogo.rc

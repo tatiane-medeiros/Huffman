@@ -15,12 +15,8 @@ class Node{
       Node *right;
       Node();
 
-      Node(int freq = 0, unsigned char content = 0, Node *left = NULL, Node *right = NULL){
-        this->content = content;
-        this->freq = freq;
-        this->left = left;
-        this->right = right;
-       }
+      Node(int freq, unsigned char content , Node *left , Node *right );
+
       ~Node();
 
       //Retorna se o Nó é uma folha

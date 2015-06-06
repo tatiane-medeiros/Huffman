@@ -8,23 +8,24 @@
 #include <QDebug>
 
 
-    Gui::Gui(QWidget *parent) :
+    Huffman::Huffman(QWidget *parent) :
         QMainWindow(parent),
-        ui(new Ui::Gui)
+        ui(new Ui::Huffman)
     {
         ui->setupUi(this);
+
     }
 
-    Gui::~Gui()
+    Huffman::~Huffman()
     {
         delete ui;
     }
 
-      void Gui::on_comprime_clicked()
+      void Huffman::on_comprime_clicked()
     {
         //comprime
        QString name = ui->arqOriginal->text();
-       
+
        QString newname = newName(name);
         
        QString aux = ui->arqNovo->text();
@@ -48,7 +49,7 @@
         }
     }
 
-    void Gui::on_descomprime_clicked()
+    void Huffman::on_descomprime_clicked()
     {
         //descomprime
         QString name = ui->arqOriginal->text();
@@ -76,13 +77,19 @@
 
     }
 
-    void Gui::on_limpar_clicked()
+    void Huffman::on_limpar_clicked()
     {
         ui->arqOriginal->clear();
         ui->arqNovo->clear();
+
     }
 
-    void Gui::on_toolButton_clicked()
+    void Huffman::on_toolButton_clicked()
     {
            ui->arqNovo->setText(QFileDialog::getExistingDirectory(this,tr("Save File"), "/home"));
     }
+
+void Huffman::on_toolButton_2_clicked()
+{
+    ui->arqOriginal->setText(QFileDialog::getOpenFileName(this,tr("Open File"), "/home"));
+}

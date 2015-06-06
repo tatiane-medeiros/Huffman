@@ -4,16 +4,16 @@
 #include <QMainWindow>
 
 namespace Ui {
-class Gui;
+class Huffman;
 }
 
-class Gui : public QMainWindow
+class Huffman : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Gui(QWidget *parent = 0);
-    ~Gui();
+    explicit Huffman(QWidget *parent = 0);
+    ~Huffman();
 
 
 private slots:
@@ -26,8 +26,10 @@ private slots:
     void on_toolButton_clicked();
 
 
+    void on_toolButton_2_clicked();
+
 private:
-    Ui::Gui *ui;
+    Ui::Huffman *ui;
 };
 
 #endif // GUI_H

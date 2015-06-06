@@ -7,6 +7,13 @@ Node::Node(){
     content = 0;
 }
 
+Node::Node(int freq , unsigned char content, Node *left, Node *right ){
+    this->content = content;
+    this->freq = freq;
+    this->left = left;
+    this->right = right;
+   }
+
 
 bool Node:: isLeaf(){
     return((this->left == NULL)&&(this->right == NULL));

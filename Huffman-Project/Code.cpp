@@ -177,7 +177,7 @@
          file.close();
 
       // lista:
-         QList<char> l;
+         QList<unsigned char> l;
          QList<Node*> list;
 
          for(int j = 0; j < 256; ++j) {
@@ -186,7 +186,7 @@
                 l.append(j);
 
                  Node *n;
-                 n = new Node(char_f[j],j);
+                 n = new Node(char_f[j],j,0,0);
                  list.append(n);
              }
          }

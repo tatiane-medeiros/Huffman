@@ -22,7 +22,7 @@ int main(int argc, char *argv[])
         else if(arg[1] == "--gui" ){
             QApplication a(argc, argv);
 
-            Gui w;
+            Huffman w;
             w.show();
             return a.exec();
         }

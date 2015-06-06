@@ -28,7 +28,7 @@
                 ++pos;
                 current = data.at(pos);
             }
-            return QPair<Node*, int> (new Node(0,current), pos);
+            return QPair<Node*, int> (new Node(0,current,0,0), pos);
         }
 
             QPair<Node*, int> leftNode = FromByteArray(data, pos+1);

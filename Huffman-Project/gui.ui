@@ -1,17 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Gui</class>
- <widget class="QMainWindow" name="Gui">
+ <class>Huffman</class>
+ <widget class="QMainWindow" name="Huffman">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>502</width>
+    <width>500</width>
     <height>256</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>256</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>510</width>
+    <height>256</height>
+   </size>
+  </property>
   <property name="windowTitle">
    <string>Gui</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(229, 243, 255);
+</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QLineEdit" name="arqOriginal">
@@ -23,13 +39,16 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QLabel" name="arquivo">
     <property name="geometry">
      <rect>
       <x>60</x>
       <y>50</y>
-      <width>101</width>
+      <width>91</width>
       <height>21</height>
      </rect>
     </property>
@@ -46,6 +65,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);</string>
+    </property>
    </widget>
    <widget class="QPushButton" name="descomprime">
     <property name="geometry">
@@ -58,6 +80,9 @@
     </property>
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(213, 239, 255);</string>
     </property>
     <property name="text">
      <string>Descomprime</string>
@@ -75,6 +100,9 @@
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(213, 239, 255);</string>
+    </property>
     <property name="text">
      <string>Comprime</string>
     </property>
@@ -84,7 +112,7 @@
      <rect>
       <x>60</x>
       <y>90</y>
-      <width>101</width>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
@@ -104,6 +132,9 @@
     <property name="cursor">
      <cursorShape>PointingHandCursor</cursorShape>
     </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(213, 239, 255);</string>
+    </property>
     <property name="text">
      <string>Limpar</string>
     </property>
@@ -117,9 +148,45 @@
       <height>19</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(213, 239, 255);</string>
+    </property>
     <property name="text">
      <string>...</string>
     </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton_2">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>50</y>
+      <width>25</width>
+      <height>19</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(213, 239, 255);</string>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="gridLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>220</y>
+      <width>160</width>
+      <height>80</height>
+     </rect>
+    </property>
+    <layout class="QGridLayout" name="gridLayout"/>
    </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
@@ -136,7 +203,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>502</width>
+     <width>500</width>
      <height>21</height>
     </rect>
    </property>
