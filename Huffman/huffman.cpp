@@ -19,8 +19,10 @@
     {
         //comprime
           QString file = ui->nameFile->text();
-          compress(file);
+          QString new_file = newName(file);
+          compress(file, new_file);
 
+          ui->newFile->setText(new_file);
           QMessageBox info;
           info.setText(QString("O arquivo \"")+file+ QString("\" foi comprimido com sucesso!"));
           info.exec();
@@ -31,7 +33,9 @@
     {
         //descomprime
         QString file = ui->nameFile->text();
-        decompress(file, ui->newFile->text());
+        QString local = ui->newFile->text();
+
+        decompress(file, local);
          QMessageBox info;
          info.setText("O arquivo foi descomprimido com sucesso!");
          info.exec();
