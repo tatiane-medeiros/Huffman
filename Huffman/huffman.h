@@ -2,9 +2,9 @@
 #define HUFFMAN_H
 #include "zip.h"
 #include <QMainWindow>
-#include<QWidget>
-#include<QMessageBox>
-#include<QFileDialog>
+#include <QWidget>
+#include <QMessageBox>
+#include <QFileDialog>
 
 
 

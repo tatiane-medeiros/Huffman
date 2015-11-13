@@ -16,17 +16,18 @@ QByteArray Head(int trash, int Tsize);
 //transforma a codificação binaria em bytes
 QPair<QByteArray, int> toByte(QByteArray bits);
 //codifica o arquivo usando a arvore de huffman.
-void compress(QString name, QString newN);
+void compress(QString name, QString newName);
 void compress(QString name);
 //retorna o tamanho do lixo e da arvore
-QPair<int,int> sizes(QByteArray data);
+int trashSize(QByteArray data);
+int treeSize(QByteArray data);
 //transforma qbytearray em qbitarray
 QBitArray toBits(const QByteArray);
 //descomprime o arquivo
 void decompress(QString name, QString local);
 void decompress(QString name);
 //nome do arquivo ".huff"
-QString newName(const QString name);
+QString Rename(const QString name);
 //altera local do arquivo
 QString newDirectory(QString name, QString local);
 

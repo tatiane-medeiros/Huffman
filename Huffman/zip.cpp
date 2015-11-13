@@ -79,9 +79,9 @@ QByteArray Head(int trash, int Tsize){
 
 
 
-void compress(QString name, QString newN)
+void compress(QString name, QString newName)
 {
-    if(newN.right(5) != QString(".huff")) qDebug("Insira um arquivo huff!");
+    if(newName.right(5) != QString(".huff")) qDebug("Insira um arquivo huff!");
     else{
 
         clock_t  start, end;
@@ -112,7 +112,7 @@ void compress(QString name, QString newN)
         QByteArray treeRep = tree->representation();
         int treeSize = treeRep.size();
 
-        QFile newfile(newN);
+        QFile newfile(newName);
         newfile.open(QIODevice::WriteOnly);     //constroi arquivo compactado
 
         int nameSize = name.size();
@@ -134,19 +134,19 @@ void compress(QString name, QString newN)
 
         newfile.close();
         double time = (end-start)/1000;
-        qDebug()<<"Arquivo" << newN <<"criado com sucesso!" <<time<<'s';
+        qDebug()<<"Arquivo" << newName <<"criado com sucesso!" <<time<<'s';
       }
 
 }
 
 void compress(QString name){
-     QString newname = newName(name);
+     QString newname = Rename(name);
      compress(name, newname);
 
 }
 
 
-QString newName(const QString name){
+QString Rename(const QString name){
     QString newname = name;
     int j;
     for(j = newname.size() - 1; j>=0; --j){
@@ -168,23 +168,27 @@ QString newName(const QString name){
 
 
 
-QPair<int, int> sizes(QByteArray data){
-
-        BitVector bits;
-        bits = bits.toBits(data);
-
-        BitVector aux;
-        aux += bits.binCode("111");
-        aux &= bits;
-        int trash = aux.value();
-        aux.clear();
-        aux += bits.binCode("0001111111111111");
-        aux &= bits;
-        int treeSize = aux.value();
-
-        return QPair<int,int> (trash, treeSize);
-
+int trashSize(QByteArray data){
+    BitVector bits;
+    bits = bits.toBits(data);
+    BitVector aux;
+    aux += bits.binCode("111");
+    aux &= bits;
+    int trash = aux.value();
+    return trash;
 }
+
+
+int treeSize(QByteArray data){
+    BitVector bits;
+    bits = bits.toBits(data);
+    BitVector aux;
+    aux += bits.binCode("0001111111111111");
+    aux &= bits;
+    int tree_size = aux.value();
+    return tree_size;
+}
+
 
 QBitArray toBits(const QByteArray bytes){
     QBitArray bits(bytes.count()*8);
@@ -211,15 +215,15 @@ void decompress(QString name, QString local){
     int nameSize = uchar(aux.at(2));
     aux.chop(1);
 
-    int trash = sizes(aux).first;
-    int treeSize = sizes(aux).second;
+    int trash = trashSize(aux);
+    int treesize = treeSize(aux);
     aux.clear();
-   // qDebug() <<trash<<treeSize <<nameSize;
+
 
     aux = compFile.read(nameSize);  //nome original
     QString myName = aux;
     aux.clear();
-    aux = compFile.read(treeSize);  //representação da arvore
+    aux = compFile.read(treesize);  //representação da arvore
 
     HTree *tree = new HTree();
     tree->rebuildTree(aux);  //reconstrói a arvore
@@ -272,9 +276,9 @@ void decompress(QString name)
 
 
 QString newDirectory(QString name, QString local){
-    local.append('\\');
+    local.append('/');
        for(int i = name.size() - 1; i>0 ; --i){
-           if(name.at(i) == '\\' ){
+           if(name.at(i) == '/' ){
                name.remove(0, i+1);
                break;
            }
@@ -282,6 +286,8 @@ QString newDirectory(QString name, QString local){
        name.insert(0,local);
    return name;
 }
+
+
 
 
 

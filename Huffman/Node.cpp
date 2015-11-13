@@ -22,9 +22,7 @@ bool Node::isLeaf(){
 
 QString Node::toLine(int num, Node *n){
     QString aux;
-
     aux += QString("   ").repeated(num);
-
     aux.append(n->m_content).append('\n');
 
     if(n->isLeaf()) return aux;
@@ -32,7 +30,6 @@ QString Node::toLine(int num, Node *n){
     else{
         aux.insert(0,toLine(num + 1, n->m_right));
         aux.append(toLine(num + 1, n->m_left));
-
 
         return aux;
     }

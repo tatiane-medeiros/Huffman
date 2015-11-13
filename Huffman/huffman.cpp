@@ -19,7 +19,10 @@
     {
         //comprime
           QString file = ui->nameFile->text();
-          QString new_file = newName(file);
+           QString local = ui->newFile->text();
+           QString new_file;
+           if(!local.isEmpty()) new_file = newDirectory(file, local);
+           new_file = Rename(new_file);
           compress(file, new_file);
 
           ui->newFile->setText(new_file);
