@@ -31,7 +31,7 @@ public:
     //retorna a codificação de um caractere na arvore
     QByteArray code(const uchar cont);
     //lista as codificações de todos os caracteres do arquivo
-    QHash<uchar, QByteArray> codeRef(int *array);
+    QHash<uchar, QBitArray> codeRef(int *array);
     //reconstói a arvore a arvore a partir da representação
     void rebuildTree(const QByteArray rep);  
     //percorre a árvore

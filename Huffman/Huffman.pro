@@ -16,15 +16,15 @@ SOURCES += main.cpp\
     zip.cpp \
     Node.cpp \
     bitvector.cpp \
-    huffman.cpp
+    gui.cpp
 
-HEADERS  += huffman.h \
-    Node.h \
+HEADERS  +=   Node.h \
     HTree.h \
     zip.h \
     help.h \
     bitvector.h \
+    gui.h \
 
-FORMS    += huffman.ui
+FORMS    += gui.ui
 
 RC_FILE += dialogo.rc

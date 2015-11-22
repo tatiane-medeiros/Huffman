@@ -9,7 +9,7 @@ int* countbytes(const QString name){
 
     QFile file(name);
 
-    Q_ASSERT_X(file.open(QIODevice::ReadOnly), "Zip::countbytes", "file not found.");
+    Q_ASSERT_X(file.open(QIODevice::ReadOnly), Q_FUNC_INFO, "file not found.");
 
     while (!file.atEnd()) {
          QByteArray line = file.read(1024);
@@ -90,31 +90,30 @@ void compress(QString name, QString newName)
         int* freq = countbytes(name);
         HTree* tree = new HTree();
         tree->buildTree(freq);      //constrói a arvore
-        QHash<uchar, QByteArray> ref = tree->codeRef(freq);   //codificação de cada caractere na arvore
+        QHash<uchar, QBitArray> ref = tree->codeRef(freq);   //codificação de cada caractere na arvore
         QFile myfile(name);
         myfile.open(QIODevice::ReadOnly);
-        QByteArray bitArray;
+       // QByteArray bitArray;
 
+         BitVector bits;
         while (!myfile.atEnd()) {       //codifica o arquivo
              QByteArray line = myfile.read(1024);
              for(int i=0; i<line.size(); ++i){
-                 bitArray.append(ref.value(line.at(i)));
+                //bitArray.append(ref.value(line.at(i)));
+                 bits.append(ref.value(line.at(i)));
              }
+            // bits += bits.binCode(bitArray);
+            // bitArray.clear();
         }
         myfile.close();
 
-        QPair<QByteArray, int> pair = toByte(bitArray);
-        QByteArray code = pair.first;
-        int trashSize = pair.second;
-//        BitVector bits; bits += bits.binCode(bitArray);
-//        int trashSize = bits.complete();
-//        QByteArray code = bits.toBytes();
+        int trashSize = bits.complete();
+        QByteArray code = bits.toBytes();
         QByteArray treeRep = tree->representation();
         int treeSize = treeRep.size();
 
         QFile newfile(newName);
         newfile.open(QIODevice::WriteOnly);     //constroi arquivo compactado
-
         int nameSize = name.size();
 
         QByteArray aux;
@@ -202,10 +201,23 @@ QBitArray toBits(const QByteArray bytes){
 }
 
 
+QString newDirectory(QString name, QString local){
+    local.append('\\');
+       for(int i = name.size() - 1; i>0 ; --i){
+           if((name.at(i) == '/') || (name.at(i) == '\\') ){
+               name.remove(0, i+1);
+               break;
+           }
+       }
+       name.insert(0,local);
+   return name;
+}
+
+
 void decompress(QString name, QString local){
 
     QFile compFile(name);
-    Q_ASSERT_X(compFile.open(QIODevice::ReadOnly), "Zip::decompress", "file not found.");
+    Q_ASSERT_X(compFile.open(QIODevice::ReadOnly), Q_FUNC_INFO, "file not found.");
     if(name.right(5) != QString(".huff")) qDebug()<<"insira um arquivo \".huff\"";
     else{
         clock_t  start, end;
@@ -275,17 +287,7 @@ void decompress(QString name)
 }
 
 
-QString newDirectory(QString name, QString local){
-    local.append('/');
-       for(int i = name.size() - 1; i>0 ; --i){
-           if(name.at(i) == '/' ){
-               name.remove(0, i+1);
-               break;
-           }
-       }
-       name.insert(0,local);
-   return name;
-}
+
 
 
 

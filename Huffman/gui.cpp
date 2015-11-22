@@ -1,5 +1,5 @@
-#include "huffman.h"
-#include "ui_huffman.h"
+#include "gui.h"
+#include "ui_gui.h"
 
 
     Huffman::Huffman(QWidget *parent) :
@@ -22,7 +22,7 @@
            QString local = ui->newFile->text();
            QString new_file;
            if(!local.isEmpty()) new_file = newDirectory(file, local);
-           new_file = Rename(new_file);
+           new_file = Rename(file);
           compress(file, new_file);
 
           ui->newFile->setText(new_file);

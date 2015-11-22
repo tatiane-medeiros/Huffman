@@ -1,5 +1,5 @@
-#include "huffman.h"
 #include <QApplication>
+#include "gui.h"
 #include "zip.h"
 #include "help.h"
 
@@ -7,8 +7,7 @@
 
 int main(int argv, char* argc[])
 {
-    clockid_t s, e;
-s=clock();
+
      if(argv == 2){
 
          QString name =argc[1];
@@ -57,9 +56,7 @@ s=clock();
 
      }
      else help();
-e=clock();
-    double time = (e-s)/1000;
-    qDebug()<<time<<'s';
+
 
     return 0;
 }

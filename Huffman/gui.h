@@ -1,5 +1,5 @@
-#ifndef HUFFMAN_H
-#define HUFFMAN_H
+#ifndef GUI_H
+#define GUI_H
 #include "zip.h"
 #include <QMainWindow>
 #include <QWidget>
@@ -36,4 +36,4 @@ private:
     Ui::Huffman *ui;
 };
 
-#endif // HUFFMAN_H
+#endif // GUI_H

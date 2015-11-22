@@ -104,13 +104,16 @@ QByteArray HTree::code(const uchar cont){
 
 }
 
-QHash<uchar, QByteArray> HTree::codeRef(int *array){
+QHash<uchar, QBitArray> HTree::codeRef(int *array){
     QByteArray aux;
-    QHash<uchar, QByteArray> ref;
+    BitVector b;
+    QHash<uchar, QBitArray> ref;
     for(int i = 0; i<256; ++i){
         if(array[i] != 0){
             aux = this->code(uchar(i));
-            ref.insert(uchar(i), aux);
+            QBitArray aux2(aux.size());
+            aux2 = b.binCode(aux);
+            ref.insert(uchar(i), aux2);
 
         }
     }
