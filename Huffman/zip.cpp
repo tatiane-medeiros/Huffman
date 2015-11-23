@@ -93,17 +93,13 @@ void compress(QString name, QString newName)
         QHash<uchar, QBitArray> ref = tree->codeRef(freq);   //codificação de cada caractere na arvore
         QFile myfile(name);
         myfile.open(QIODevice::ReadOnly);
-       // QByteArray bitArray;
 
          BitVector bits;
         while (!myfile.atEnd()) {       //codifica o arquivo
              QByteArray line = myfile.read(1024);
              for(int i=0; i<line.size(); ++i){
-                //bitArray.append(ref.value(line.at(i)));
                  bits.append(ref.value(line.at(i)));
              }
-            // bits += bits.binCode(bitArray);
-            // bitArray.clear();
         }
         myfile.close();
 
@@ -285,10 +281,6 @@ void decompress(QString name)
 {
     decompress(name, "");
 }
-
-
-
-
 
 
 
